@@ -7,3 +7,4 @@
 # Build folder
 /public/*.html
 /public/**/*.html
+/pages

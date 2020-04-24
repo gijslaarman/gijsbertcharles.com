@@ -7,6 +7,11 @@ const Api = axios.create({
 const get = {
     portfolioItems() {
         return Api.get('/portfolio_items').then(result => result.data)
+    },
+    homepage() {
+        return Api.get('/pages').then(pages => {
+            return pages.data.find(page => page.link === 'https://api.gijslaarman.nl/')
+        })
     }
 }
 

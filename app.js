@@ -4,6 +4,7 @@ const dotenv = require('dotenv')
 const nunjucks = require('nunjucks')
 const nunjuckStatic = require('./src/modules/nunjuckStatic.js')
 const get = require('./src/modules/api.js')
+const build = require('./src/modules/build.js')
 // dotenv config
 dotenv.config()
 
@@ -17,11 +18,11 @@ app.set('view engine', 'html')
 
 nunjucks.configure('src/views', {
     express: app,
-    autoescape: true
+    autoescape: false
 })
 
 nunjuckStatic.config({
-    staticDirectory: __dirname + '/public'
+    staticDirectory: __dirname + '/pages'
 })
 
 // Middleware
@@ -30,24 +31,23 @@ app.use(express.static('pages'))
 app.disable('x-powered-by')
 
 app.post('/update-website', (req, res) => {
-    console.log(req.body)
-    nunjuckStatic.generateIndex('index.html')
-    nunjuckStatic.generateIndex('404.html')
-
-    get.portfolioItems().then(items => {
-        items.forEach(portfolioItem => {
-            nunjuckStatic.generateSubpage('/' + portfolioItem.slug, 'portfolio-item.html', {title: portfolioItem.title.rendered})
-        })
-    })
-
+    build()
     res.send('Updated website!')
 })
 
 app.get('*', (req, res) => {
     // Public handles all existing pages, but doesn't handle not found pages. So if the page cannot be found in public send a 404 page.
-    res.status(404).sendFile(__dirname + '/public/404.html')
+    res.status(404).sendFile(__dirname + '/pages/404.html')
 })
 
 app.listen(port, () => {
     console.log(`Running, listening on: localhost:${port}`)
 })
+
+// used for NPM run script: npm run build
+module.exports.staticBuild = function() {
+    build(() => {
+        console.log('Build pages')
+        return process.exit(0) // Don't start the server.
+    })
+}
