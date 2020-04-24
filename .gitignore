@@ -1,0 +1,9 @@
+# Environment
+.env
+
+# Node / NPM
+/node_modules
+
+# Build folder
+/public/*.html
+/public/**/*.html

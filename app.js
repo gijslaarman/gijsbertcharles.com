@@ -41,22 +41,12 @@ app.post('/update-website', (req, res) => {
     })
 
     res.send('Updated website!')
-    // get.portfolioItems().then(json => res.send(json))
 })
 
-app.get('/:404', (req, res) => {
-    res.sendFile(__dirname + '/404.html')
+app.get('*', (req, res) => {
+    // Public handles all existing pages, but doesn't handle not found pages. So if the page cannot be found in public send a 404 page.
+    res.status(404).sendFile(__dirname + '/public/404.html')
 })
-
-// // Routes
-// app.get('/', (req, res) => {
-//     res.sendFile(__dirname + '/index.html')
-// })
-
-// // 404 if above routes and static folders have nothing.
-// app.get('/:anything', (req, res) => {
-//     res.sendFile(__dirname + '/pages/404.html')
-// })
 
 app.listen(port, () => {
     console.log(`Running, listening on: localhost:${port}`)
