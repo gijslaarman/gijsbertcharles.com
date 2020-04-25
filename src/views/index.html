@@ -1,12 +1,14 @@
-<!DOCTYPE html>
-<html lang="nl" dir="ltr">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Gijsbertcharles.com</title>
-	</head>
-	<body>
-		<h1>Index view</h1>
-		{{ content | safe}}
-    </body>
-</html>
+{% extends 'layouts/default.html' %}
+
+{% block content %}
+<section id="articles">
+	<h2>Articles</h2>
+
+	<div class="full-width">
+		<article>
+	
+		</article>
+	</div>
+</section>
+	{{ content | safe}}
+{% endblock %}

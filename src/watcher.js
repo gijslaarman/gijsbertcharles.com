@@ -20,7 +20,7 @@ const port = process.env.PORT || 3000
 app.engine('html', nunjucks.render)
 app.set('view engine', 'html')
 
-nunjucks.configure('src/views', {
+nunjucks.configure(['src/views', 'src/components'], {
     express: app,
     autoescape: true
 })

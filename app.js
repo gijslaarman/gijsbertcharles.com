@@ -3,7 +3,6 @@ const express = require('express')
 const dotenv = require('dotenv')
 const nunjucks = require('nunjucks')
 const nunjuckStatic = require('./src/modules/nunjuckStatic.js')
-const get = require('./src/modules/api.js')
 const build = require('./src/modules/build.js')
 // dotenv config
 dotenv.config()
@@ -16,9 +15,9 @@ const port = process.env.PORT || 3000
 app.engine('html', nunjucks.render)
 app.set('view engine', 'html')
 
-nunjucks.configure('src/views', {
+nunjucks.configure(['src/views', 'src/components'], {
     express: app,
-    autoescape: false
+    autoescape: true
 })
 
 nunjuckStatic.config({
@@ -31,8 +30,9 @@ app.use(express.static('pages'))
 app.disable('x-powered-by')
 
 app.post('/update-website', (req, res) => {
-    build()
-    res.send('Updated website!')
+    build(function() {
+        res.send('Updated website!')
+    })
 })
 
 app.get('*', (req, res) => {

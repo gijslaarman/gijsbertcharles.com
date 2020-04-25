@@ -1,0 +1,27 @@
+{% from '../../components/header/header.html' import header %}
+
+
+<!DOCTYPE html>
+<html lang="nl" dir="ltr">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>Gijsbertcharles.com</title>
+
+		<link rel="stylesheet" href="/styles.min.css" />
+	</head>
+
+	<body>
+        {% call header({
+            logoTitle: "Gijsbert Charles Laarman"
+        }) %}
+        {% endcall %}
+
+        <main id="content">
+            {% block content %}
+                <!-- Content will go here -->
+            {% endblock %}
+        </main>
+    </body>
+</html>

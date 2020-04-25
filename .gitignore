@@ -8,3 +8,8 @@
 /public/*.html
 /public/**/*.html
 /pages
+/**/*.css
+/**/*.js
+
+# Caches
+/.sass-cache

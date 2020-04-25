@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./src/watcher.js",
-    "build": "node -e 'require(\"./app.js\").staticBuild()'",
-    "start": "node app.js"
+    "build": "npm run build-css && node -e 'require(\"./app.js\").staticBuild()'",
+    "start": "node app.js",
+    "build-css": "del public/*.css && node-sass --importer node_modules/node-sass-glob-importer/dist/cli.js src/assets/sass/main.scss public/styles.min.css --output-style compressed",
+    "watch:css": "chokidar '**/*.scss' -c 'npm run build-css'"
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,10 @@
     "nunjucks": "^3.2.1"
   },
   "devDependencies": {
+    "chokidar-cli": "^2.1.0",
+    "del-cli": "^3.0.0",
+    "node-sass": "^4.14.0",
+    "node-sass-glob-importer": "^5.3.2",
     "nodemon": "^2.0.3"
   }
 }
