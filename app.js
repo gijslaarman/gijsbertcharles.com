@@ -2,8 +2,8 @@
 const express = require('express')
 const dotenv = require('dotenv')
 const nunjucks = require('nunjucks')
-const nunjuckStatic = require('./src/modules/nunjuckStatic.js')
-const build = require('./src/modules/build.js')
+const nunjuckStatic = require('./src/server_modules/nunjuckStatic.js')
+const build = require('./src/server_modules/build.js')
 // dotenv config
 dotenv.config()
 

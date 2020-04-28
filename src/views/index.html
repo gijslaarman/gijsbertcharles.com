@@ -1,14 +1,11 @@
+{% from '../components/articles/_section_articles.html' import section_articles %}
+
 {% extends 'layouts/default.html' %}
 
 {% block content %}
-<section id="articles">
-	<h2>Articles</h2>
 
-	<div class="full-width">
-		<article>
-	
-		</article>
-	</div>
-</section>
-	{{ content | safe}}
+	{% call section_articles(articles) %}
+
+	{% endcall %}
+
 {% endblock %}

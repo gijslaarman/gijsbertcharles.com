@@ -20,3 +20,24 @@ body {
     overflow-x: hidden;
     min-height: 100%;
 }
+
+main {
+    max-width: 82em;
+    padding: 1em;
+    margin: 0 auto;
+}
+
+.full-width {
+    position: relative;
+    margin-left: -50vw;
+    width: 100vw;
+    left: 50%;
+}
+
+.flex {
+    display: flex;
+}
+
+.scroll-horizontal {
+    overflow-x: scroll;
+}

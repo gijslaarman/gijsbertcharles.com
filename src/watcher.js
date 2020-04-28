@@ -8,7 +8,7 @@ Watcher file for development purposes, does not build static sites but renders t
 const express = require('express')
 const dotenv = require('dotenv')
 const nunjucks = require('nunjucks')
-const get = require('./modules/api.js')
+const get = require('./server_modules/api.js')
 // dotenv config
 dotenv.config()
 
@@ -29,11 +29,24 @@ nunjucks.configure(['src/views', 'src/components'], {
 app.use(express.static('public'))
 app.disable('x-powered-by')
 
-app.get('/', (req, res) => {
-    get.homepage().then(homepage => {
+app.get('/', async (req, res) => {
+    const posts = await get.posts()
+    const homepage = await get.homepage()
+
+    Promise.all([posts, homepage]).then(() => {
+        console.log(posts)
+
         res.render('index.html', {
-            title: homepage.title.rendered,
-            content: homepage.content.rendered
+            articles: posts
+        })
+    })
+})
+
+app.get('/:post', (req, res) => {
+    get.post(req.params.post).then(post => {
+        return res.render('post.html', {
+            title: post.title.rendered,
+            postContent: post.content.rendered
         })
     })
 })

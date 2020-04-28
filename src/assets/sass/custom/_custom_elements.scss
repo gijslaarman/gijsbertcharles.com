@@ -1,0 +1,15 @@
+pre[class*="language-"] {
+    border-radius: .5em;
+    box-shadow: 0 4px 14px #21212130;
+    padding: 1.5em;
+    margin: 1.5em -1.5em 1.5em;
+
+    * {
+        font-family: inherit !important;
+    }
+}
+
+.post {
+    max-width: 40em;
+    margin: 4em auto;
+}

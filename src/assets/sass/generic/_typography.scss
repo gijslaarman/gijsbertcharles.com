@@ -1,0 +1,77 @@
+* {
+    font-family: 'SF Pro Display', 'Helvetica Neue', 'Helvetica', 'system-ui', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, p, li {
+    color: #343434;
+    margin: unset;
+    padding: unset;
+    margin-bottom: .75em;
+}
+
+.wp-block-buttons, figure, p, pre, ol, ul {
+    margin-bottom: 1.5em;
+}
+
+header h1 {
+    font-size: 5.25em;
+    margin: 0;
+}
+
+h1 {
+    font-size: 2.5em;
+}
+
+h2 {
+    font-size: 2em;
+    margin-top: 5rem;
+}
+
+h3 {}
+
+h4 {
+    font-size: 1.25em;
+}
+
+p, li {
+    line-height: 1.7;
+}
+
+li {
+    margin: 0 0 5px 1.5rem;
+    list-style: none;
+    position: relative;
+
+    &:before {
+        margin-right: 5px;
+        position: absolute;
+        left: -1.5rem;
+    }
+}
+
+ol {
+    counter-reset: ol;
+    
+    li {
+        counter-increment: ol;
+        margin-left: 1.5rem;
+
+        &:before {
+            font-weight: bold;
+            content: counter(ol) ".";
+            color: red;
+        }
+    }
+}
+
+ul {
+    li {
+        &:before {
+            content: "";
+            width: .25em;
+            height: .25em;
+            border-radius: 50%;
+            background-color: red;
+        }
+    }
+}

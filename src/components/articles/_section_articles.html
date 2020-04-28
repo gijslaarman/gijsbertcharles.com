@@ -1,0 +1,19 @@
+{% macro section_articles(data) %}
+    <section class="articles">
+        <h2>Articles</h2>
+        <div class="full-width scroll-horizontal flex onethird">
+
+            {% for a in data %}
+
+                <a href="/{{a.slug}}">
+                    <article>
+                        <img src="https://via.placeholder.com/600x300" alt="placeholder">
+                        <h3>{{a.title.rendered}}</h3>
+                    </article>
+                </a>
+
+            {% endfor %}
+        
+        </div>
+    </section>
+{% endmacro %}

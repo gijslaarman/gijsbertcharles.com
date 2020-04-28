@@ -1,5 +1,5 @@
 {% from '../../components/header/header.html' import header %}
-
+{% set pageIdentifier = page if page %}
 
 <!DOCTYPE html>
 <html lang="nl" dir="ltr">
@@ -12,7 +12,7 @@
 		<link rel="stylesheet" href="/styles.min.css" />
 	</head>
 
-	<body>
+	<body class="{{pageIdentifier}}">
         {% call header({
             logoTitle: "Gijsbert Charles Laarman"
         }) %}
@@ -24,4 +24,6 @@
             {% endblock %}
         </main>
     </body>
+
+    <script src="prism.js"></script>
 </html>
