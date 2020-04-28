@@ -3,8 +3,8 @@
 {% block content %}
 
 <article class="post">
-    <h1>{{ title | safe }}</h1>
-    {{ postContent | safe }}
+    <h1>{{ title.rendered | safe }}</h1>
+    {{ content.rendered | safe }}
 </article>
 
 {% endblock %}

@@ -9,6 +9,11 @@ const get = {
     portfolioItems() {
         return Api.get('/portfolio_items').then(result => result.data)
     },
+    async notFound() {
+        const pages = await Api.get('/pages')
+        const filtered = pages.data.find(page => page.acf.errorpage)
+        return filtered
+    },
     posts() {
         return Api.get('/posts').then(result => result.data)
     },
@@ -17,9 +22,14 @@ const get = {
         const thisPost = posts.find(post => post.slug === slug)
         return thisPost
     },
+    async pages() {
+        const pages = await Api.get('/pages')
+        const filtered = pages.data.filter(page => page.link !== process.env.HOMEPAGE)
+        return filtered
+    },
     homepage() {
         return Api.get('/pages').then(pages => {
-            return pages.data.find(page => page.link === 'https://api.gijslaarman.nl/')
+            return pages.data.find(page => page.link === process.env.HOMEPAGE)
         })
     }
 }

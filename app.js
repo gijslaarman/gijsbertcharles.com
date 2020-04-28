@@ -1,4 +1,5 @@
 // Import / requires
+const compression = require('compression')
 const express = require('express')
 const dotenv = require('dotenv')
 const nunjucks = require('nunjucks')
@@ -10,6 +11,7 @@ dotenv.config()
 // Express config
 const app = express()
 const port = process.env.PORT || 3000
+app.use(compression())
 
 // Nunjucks config
 app.engine('html', nunjucks.render)

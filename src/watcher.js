@@ -42,7 +42,10 @@ app.get('/', async (req, res) => {
     })
 })
 
-app.get('/:post', (req, res) => {
+app.get('/posts', (req, res) => {
+})
+
+app.get('/posts/:post', (req, res) => {
     get.post(req.params.post).then(post => {
         return res.render('post.html', {
             title: post.title.rendered,

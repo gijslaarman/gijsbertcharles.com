@@ -13,10 +13,7 @@
 	</head>
 
 	<body class="{{pageIdentifier}}">
-        {% call header({
-            logoTitle: "Gijsbert Charles Laarman"
-        }) %}
-        {% endcall %}
+        {% call header({ logoTitle: "Gijsbert Charles Laarman"}) %}{% endcall %}
 
         <main id="content">
             {% block content %}
@@ -25,5 +22,5 @@
         </main>
     </body>
 
-    <script src="prism.js"></script>
+    <script src="/prism.js"></script>
 </html>

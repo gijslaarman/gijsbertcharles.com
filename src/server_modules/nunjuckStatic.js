@@ -14,8 +14,12 @@ nunjuckStaticGenerator = {
         return this.generate(template, details, dirPath)
     },
     generate(template, details, dirPath) {
+        console.log(dirPath)
         if (!this.staticDirectory) throw new Error('No static directory configured. Configure one with "nunjuckStatic.config({ staticDirectory: __dirname + "/public"}) e.g." function.')
-        if (!fs.existsSync(dirPath)) { fs.mkdirSync(dirPath) }
+        if (!fs.existsSync(dirPath)) { 
+            console.log('Creating new folder: ' + dirPath)
+            fs.mkdirSync(dirPath, { recursive: true }) 
+        }
 
         const html = nunjucks.render(template, details)
         let htmlName = 'index'

@@ -1,6 +1,10 @@
 header {
     padding: 1em;
-    border-bottom: 1px solid #E6E6E6;
+    background-color: $color-white;
+    border-bottom: 1px solid $color-lightgrey;
+    position: fixed;
+    top: 0;
+    width: 100%;
 
     span {
         font-size: 1.5em;
