@@ -5,8 +5,7 @@
 /node_modules
 
 # Build folder
-/public/*.html
-/public/**/*.html
+/public/*.js
 /pages
 /**/*.css
 

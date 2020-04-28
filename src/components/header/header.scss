@@ -1,12 +1,44 @@
 header {
+    $header-speed: 500ms;
     padding: 1em;
     background-color: $color-white;
     border-bottom: 1px solid $color-lightgrey;
     position: fixed;
     top: 0;
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    transition: $header-speed;
+    justify-content: space-between;
+
+    h1 {
+        font-size: 5.25em;
+        text-decoration: none;
+        color: $color-black;
+        flex: 1 1 100%;
+        transition: $header-speed;
+
+        * {
+            color: inherit;
+        }
+    }
 
     span {
         font-size: 1.5em;
+        flex: 1 1 100%;
+        transition: $header-speed;
+    }
+
+    &.fixed {
+        h1 {
+            font-size: 1.25em;
+            flex: 1 1 50%;
+        }
+
+        span {
+            font-size: 1em;
+            flex: 1 1 50%;
+            text-align: right;
+        }
     }
 }
