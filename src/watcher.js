@@ -9,6 +9,7 @@ const express = require('express')
 const dotenv = require('dotenv')
 const nunjucks = require('nunjucks')
 const get = require('./server_modules/api.js')
+const dayjs = require('dayjs')
 // dotenv config
 dotenv.config()
 
@@ -36,11 +37,9 @@ function cache() {
     get.pages().then(pages => {
         cachePages = pages
 
-        console.log(cachePages)
+        // console.log(cachePages)
     })
 }
-
-console.log('yo', process.env.ENVIRONMENT)
 
 cache()
 
@@ -55,10 +54,13 @@ app.get('/', async (req, res) => {
     })
 })
 
-
 app.get('/posts/:post', (req, res) => {
     get.post(req.params.post).then(post => {
-        return res.render('post.html', post)
+        get.categories(post.categories).then(categories => {
+            post.tags = categories
+            post.last_updated = dayjs(post.modified).format('DD MMM, YYYY')
+            return res.render('post.html', { post })
+        })
     })
 })
 
@@ -68,11 +70,19 @@ app.get('/projects/:portfolioitem', (req,res) => {
 })
 
 app.get('/:page', (req, res) => {
-    console.log(cachePages)
     const existingPage = cachePages.find(page => page.slug === req.params.page)
 
     if (existingPage) {
-        res.render('page.html', { page: existingPage })
+        switch(existingPage.slug) {
+            case 'posts':
+                res.render('posts.html', existingPage)
+            break;
+            case 'portfolio-items':
+                res.render('projects.html')
+            break;
+            default:
+                res.render('page.html', { page: existingPage })
+        }
     } else {
         res.status(404).render('404.html')
     }
@@ -84,5 +94,5 @@ app.get('*', (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log(`Running, listening on: localhost:${port}`)
+    console.log(`Running, listening on: localhost:${port} & env: ${process.env.ENVIRONMENT}`)
 })

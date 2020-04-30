@@ -1,0 +1,33 @@
+{% macro article(data) %}
+{% from '../crumblepath/crumblepath.html' import crumblepath %}
+{% from './_tags.html' import tags %}
+
+<article class="post">
+    <header>
+        {% call crumblepath([
+                { name: 'Posts', link: '/posts' }
+            ]) %}
+        {% endcall %}
+
+        <div class="meta">
+            <div class="date">
+                <div class="prefix">Last updated</div>
+                <time>
+                    {{ data.last_updated }}
+                </time>
+            </div>
+            <div class="read-time">
+                <div class="prefix">Read time</div>
+                <time>{{data.acf.read_time}} minutes</time>
+            </div>
+
+            {% call tags(data.tags) %}
+            {% endcall %}
+        </div>
+        <h1>{{ data.title.rendered | safe }}</h1>
+    </header>
+
+    {{ data.content.rendered | safe }}
+</article>
+
+{% endmacro %}

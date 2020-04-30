@@ -14,6 +14,20 @@ const get = {
         const filtered = pages.data.find(page => page.acf.errorpage)
         return filtered
     },
+    async categories(filter) {
+        const categories = await Api.get('/categories')
+
+        if (filter) {
+            // HOW FILTER: [1, 4, 5]
+            const array = []
+            filter.forEach(id => {
+                array.push(categories.data.find(category => category.id == id))
+            })
+            return array
+        } else {
+            return categories.data
+        }
+    },
     posts() {
         return Api.get('/posts').then(result => result.data)
     },

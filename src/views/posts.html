@@ -1,7 +1,12 @@
 {% extends 'layouts/default.html' %}
+{% from '../components/crumblepath/crumblepath.html' import crumblepath %}
 
 {% block content %}
 
+{% call crumblepath([]) %}
+{% endcall %}
+
 <h1>{{ page.title.rendered }}</h1>
+<p>kaolo</p>
 
 {% endblock %}

@@ -8,6 +8,7 @@
 html, body {
     -webkit-font-smoothing: antialiased;
     min-width: 320px;
+    overflow-x: hidden;
 }
 
 html {
@@ -17,14 +18,19 @@ html {
 
 body {
     overflow-y: auto;
-    overflow-x: hidden;
     min-height: 100%;
 }
 
 main {
     max-width: 82em;
-    padding: 10em 1em 1em;
+    padding: 1em;
     margin: 0 auto;
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
 .full-width {

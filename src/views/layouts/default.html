@@ -13,7 +13,10 @@
 	</head>
 
 	<body class="{{pageIdentifier}}">
-        {% call header({ logoTitle: "Gijsbert Charles Laarman"}) %}{% endcall %}
+        {% block header %}
+            {% call header({ logoTitle: "Gijsbert Charles Laarman"}) %}
+            {% endcall %}
+        {% endblock %}
 
         <main id="content">
             {% block content %}

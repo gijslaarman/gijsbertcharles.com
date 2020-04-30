@@ -1,0 +1,19 @@
+.crumblepath {
+    font-size: 1.25em;
+    padding: .25em .5em .25em .25em;
+    border-radius: .25rem;
+    background-color: $color-slate;
+    color: $color-white;
+    display: inline-block;
+
+    a {
+        text-decoration: none;
+        padding: .25em;
+        font-weight: bold;
+        color: inherit;
+    }
+
+    .separator {
+        color: inherit;
+    }
+}

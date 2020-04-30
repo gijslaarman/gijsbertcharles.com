@@ -25,13 +25,22 @@ async function getAllPages() {
 
 //     return 'done'
 // }
+function displayConsole(color, msg) {
+    switch(color) {
+        case 'green':
+            return console.log(`\x1b[32m${msg}\x1b[0m`)
+        case 'red':
+            return console.log(`\x1b[31m${msg}\x1b[0m`)
+    }
+}
 
 function createPosts() {
     posts.forEach(post => {
-        nunjuckStatic.generateSubpage('/posts/' + post.slug, 'post.html', post)
+        const folder = '/posts/' + post.slug
+        nunjuckStatic.generateSubpage(folder, 'post.html', post)
+        return displayConsole('green', 'Created post: ' + folder)
     })
 
-    return console.log('Created posts')
 }
 
 function createPages() {
@@ -41,20 +50,21 @@ function createPages() {
         }
 
         if (page.acf.template === 'posts.html') {
-            return nunjuckStatic.generateSubpage('/' + page.slug, page.acf.template, { posts, page })
+            nunjuckStatic.generateSubpage('/' + page.slug, page.acf.template, { posts, page })
         } else if (page.acf.template === 'portfolio.html') {
-            return nunjuckStatic.generateSubpage('/' + page.slug, page.acf.template, { portfolioItems, page })
+            nunjuckStatic.generateSubpage('/' + page.slug, page.acf.template, { portfolioItems, page })
         } else {
-            return nunjuckStatic.generateSubpage('/' + page.slug, page.acf.template, { page })
+            nunjuckStatic.generateSubpage('/' + page.slug, page.acf.template, { page })
         }
+
+        return displayConsole('green', 'Created Page: /' + page.slug + ' | template: ' + page.acf.template)
     })
 
-    return console.log('Created Pages.')
 }
 
 function create404() {
-    console.log(notFound)
     nunjuckStatic.generateIndex('404.html', notFound)
+    return displayConsole('green', 'Created 404-page.')
 }
 
 function createHomepage() {
@@ -63,11 +73,14 @@ function createHomepage() {
         homepage
     })
 
-    return console.log('Created Homepage')
+    return displayConsole('green', 'Created Homepage.')
 }
 
 async function build(callback) {
     getAllPages().then(() => {
+        // DELETE EVERY PAGE!!
+        nunjuckStatic.emptyDirectory()
+
         // Create 404 page
         create404()
 

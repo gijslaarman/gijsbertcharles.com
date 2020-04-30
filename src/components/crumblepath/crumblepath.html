@@ -1,0 +1,9 @@
+{% macro crumblepath(array) %}
+    <nav class="crumblepath">
+        <a href="/">Home</a><span class="separator">/</span>
+
+        {% for path in array %}
+            <a href="{{path.link}}">{{path.name}}</a> <span class="separator">/</span>
+        {% endfor %}
+    </nav>
+{% endmacro %}

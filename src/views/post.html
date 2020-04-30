@@ -1,10 +1,9 @@
 {% extends 'layouts/default.html' %}
+{% from '../components/articles/_article.html' import article %}
 
 {% block content %}
 
-<article class="post">
-    <h1>{{ title.rendered | safe }}</h1>
-    {{ content.rendered | safe }}
-</article>
+    {% call article(post) %}
+    {% endcall %}
 
 {% endblock %}
