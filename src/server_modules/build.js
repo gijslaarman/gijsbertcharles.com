@@ -6,6 +6,7 @@ let pages = []
 let notFound = {}
 let portfolioItems = []
 let homepage = {}
+let categories = []
 
 async function getAllPages() {
     posts = await get.posts()
@@ -13,6 +14,7 @@ async function getAllPages() {
     portfolioItems = await get.portfolioItems()
     homepage = await get.homepage()
     notFound = await get.notFound()
+    categories = await get.categories()
     return
 }
 
@@ -37,8 +39,13 @@ function displayConsole(color, msg) {
 function createPosts() {
     posts.forEach(post => {
         const folder = '/posts/' + post.slug
-        nunjuckStatic.generateSubpage(folder, 'post.html', post)
-        return displayConsole('green', 'Created post: ' + folder)
+
+        get.categories(post.categories).then(categories => {
+            post.tags = categories
+            post.last_updated = dayjs(post.modified).format('DD MMM, YYYY')
+            nunjuckStatic.generateSubpage(folder, 'post.html', { post })
+            return displayConsole('green', 'Created post: ' + folder)
+        })
     })
 
 }
