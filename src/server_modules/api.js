@@ -23,7 +23,7 @@ const get = {
             filter.forEach(id => {
                 array.push(categories.data.find(category => category.id == id))
             })
-            return array
+            return
         } else {
             return categories.data
         }

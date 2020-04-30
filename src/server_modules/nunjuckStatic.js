@@ -9,7 +9,9 @@ nunjuckStaticGenerator = {
     },
 
     emptyDirectory() {
-        fs.rmdirSync(this.staticDirectory, { recursive: true })
+        if (fs.existsSync(this.staticDirectory)) {
+            fs.rmdirSync(this.staticDirectory, { recursive: true })
+        }
     },
 
     generateIndex(template, details) {

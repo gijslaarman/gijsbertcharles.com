@@ -1,5 +1,7 @@
 const nunjuckStatic = require('./nunjuckStatic.js')
 const get = require('./api')
+const filterBy = require('./helpers').filterBy
+const dayjs = require('dayjs')
 
 let posts = []
 let pages = []
@@ -40,12 +42,11 @@ function createPosts() {
     posts.forEach(post => {
         const folder = '/posts/' + post.slug
 
-        get.categories(post.categories).then(categories => {
-            post.tags = categories
-            post.last_updated = dayjs(post.modified).format('DD MMM, YYYY')
-            nunjuckStatic.generateSubpage(folder, 'post.html', { post })
-            return displayConsole('green', 'Created post: ' + folder)
-        })
+        post.tags = filterBy('id', categories, post.categories)
+        post.last_updated = dayjs(post.modified).format('DD MMM, YYYY')
+        
+        nunjuckStatic.generateSubpage(folder, 'post.html', { post })
+        return displayConsole('green', 'Created post: ' + folder)
     })
 
 }
