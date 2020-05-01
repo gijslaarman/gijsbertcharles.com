@@ -32,7 +32,7 @@ app.use(express.static('pages'))
 app.disable('x-powered-by')
 
 app.post('/update-website', (req, res) => {
-    console.log(req)
+    console.log(req.headers, req.body)
     console.log('======')
     build(function() {
         res.send('Updated website!')
