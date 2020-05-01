@@ -5,6 +5,7 @@ const dotenv = require('dotenv')
 const nunjucks = require('nunjucks')
 const nunjuckStatic = require('./src/server_modules/nunjuckStatic.js')
 const build = require('./src/server_modules/build.js')
+const bodyParser = require('body-parser')
 // dotenv config
 dotenv.config()
 
@@ -12,6 +13,11 @@ dotenv.config()
 const app = express()
 const port = process.env.PORT || 3000
 app.use(compression())
+
+// Middleware
+// ** Body Parser **
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Nunjucks config
 app.engine('html', nunjucks.render)
@@ -32,11 +38,12 @@ app.use(express.static('pages'))
 app.disable('x-powered-by')
 
 app.post('/update-website', (req, res) => {
-    console.log(req.headers, req.body)
+    console.log(req.body)
     console.log('======')
-    build(function() {
-        res.send('Updated website!')
-    })
+    res.send('Hello!')
+    // build(function() {
+    //     res.send('Updated website!')
+    // })
 })
 
 app.get('*', (req, res) => {
