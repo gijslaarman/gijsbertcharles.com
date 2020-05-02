@@ -6,6 +6,8 @@ const nunjucks = require('nunjucks')
 const nunjuckStatic = require('./src/server_modules/nunjuckStatic.js')
 const build = require('./src/server_modules/build.js')
 const bodyParser = require('body-parser')
+const postHandler = require('./src/server_modules/post-handler.js')
+
 // dotenv config
 dotenv.config()
 
@@ -38,12 +40,8 @@ app.use(express.static('pages'))
 app.disable('x-powered-by')
 
 app.post('/update-website', (req, res) => {
-    console.log(req.body)
-    console.log('======')
-    res.send('Hello!')
-    // build(function() {
-    //     res.send('Updated website!')
-    // })
+    postHandler(req.body)
+    return res.send('hello')
 })
 
 app.get('*', (req, res) => {
@@ -56,7 +54,7 @@ app.listen(port, () => {
 })
 
 // used for NPM run script: npm run build
-module.exports.staticBuild = function() {
+module.exports.staticBuild = function () {
     build(() => {
         console.log('\x1b[42m> Done building all pages!\x1b[0m')
         return process.exit(0) // Don't start the server.

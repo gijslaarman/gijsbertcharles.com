@@ -16,7 +16,6 @@ async function getAllPages() {
     portfolioItems = await get.portfolioItems()
     homepage = await get.homepage()
     notFound = await get.notFound()
-    categories = await get.categories()
     return
 }
 

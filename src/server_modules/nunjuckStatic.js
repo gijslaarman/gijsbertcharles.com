@@ -3,9 +3,16 @@ const fs = require('fs')
 const minify = require('html-minifier').minify
 const path = require('path')
 
-nunjuckStaticGenerator = {
+module.exports = {
     config(obj) {
         this.staticDirectory = obj.staticDirectory || this.staticDirectory || undefined
+    },
+
+    deletePath(path) {
+        const fullPath = this.staticDirectory + path
+        if (fs.existsSync(fullPath)) {
+            fs.rmdirSync(fullPath, { recursive: true })
+        }
     },
 
     emptyDirectory() {
@@ -48,5 +55,3 @@ nunjuckStaticGenerator = {
         })
     }
 }
-
-module.exports = nunjuckStaticGenerator

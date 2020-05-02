@@ -1,3 +1,4 @@
 {
-    "ext": "js, html, mjs, json"
+    "ext": "js, html, mjs, json",
+    "ignore": ["pages/"] 
 }

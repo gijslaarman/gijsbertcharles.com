@@ -1,7 +1,7 @@
-{% macro article(data) %}
 {% from '../crumblepath/crumblepath.html' import crumblepath %}
 {% from './_tags.html' import tags %}
 
+{% macro article(entry) %}
 <article class="post">
     <header>
         {% call crumblepath([
@@ -13,21 +13,23 @@
             <div class="date">
                 <div class="prefix">Last updated</div>
                 <time>
-                    {{ data.last_updated }}
+                    {{ entry.updated_at }}
                 </time>
             </div>
             <div class="read-time">
                 <div class="prefix">Read time</div>
-                <time>{{data.acf.read_time}} minutes</time>
+                <time>{{ entry.read_time }} minutes</time>
             </div>
 
-            {% call tags(data.tags) %}
+            {% call tags(entry.tags) %}
             {% endcall %}
         </div>
-        <h1>{{ data.title.rendered | safe }}</h1>
+
+        <h1>{{ entry.title | safe }}</h1>
     </header>
 
-    {{ data.content.rendered | safe }}
+    {% for markdown in entry.markdown %}
+        {{ markdown.content | safe }}
+    {% endfor %}
 </article>
-
 {% endmacro %}
