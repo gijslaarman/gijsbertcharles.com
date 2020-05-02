@@ -7,6 +7,7 @@
     "dev": "npm run kill-port && nodemon -r ./src/watcher.js & npm run watch",
     "build": "npm run kill-port && npm run build-js && npm run build-css && node -e 'require(\"./app.js\").staticBuild()'",
     "start": "npm run build && node app.js",
+    "build-pages": "node -e 'require(\"./app.js\").staticBuild()'",
     "build-css": "del public/*.css && node-sass --importer node_modules/node-sass-glob-importer/dist/cli.js src/assets/sass/main.scss public/styles.min.css --output-style compressed",
     "build-js": "del public/*.js && rollup --config src/assets/js/rollup.config.js",
     "watch": "chokidar '**/*.scss' -c 'npm run build-css'",

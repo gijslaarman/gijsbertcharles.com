@@ -13,7 +13,7 @@
             <div class="date">
                 <div class="prefix">Last updated</div>
                 <time>
-                    {{ entry.updated_at }}
+                    {{ entry.last_updated }}
                 </time>
             </div>
             <div class="read-time">
@@ -28,8 +28,8 @@
         <h1>{{ entry.title | safe }}</h1>
     </header>
 
-    {% for markdown in entry.markdown %}
-        {{ markdown.content | safe }}
+    {% for md in entry.markdown %}
+        {{ md | safe }}
     {% endfor %}
 </article>
 {% endmacro %}

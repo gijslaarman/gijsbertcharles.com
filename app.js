@@ -56,7 +56,7 @@ app.listen(port, () => {
 // used for NPM run script: npm run build
 module.exports.staticBuild = function () {
     build(() => {
-        console.log('\x1b[42m> Done building all pages!\x1b[0m')
+        console.log('\n\x1b[42m> Done building all pages! \x1b[0m\n')
         return process.exit(0) // Don't start the server.
     })
 }

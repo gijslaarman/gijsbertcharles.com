@@ -1,6 +1,5 @@
 const nunjuckStatic = require('./nunjuckStatic.js')
-const showdown = require('showdown')
-const converter = new showdown.Converter()
+const postFormatter = require('./helpers').postFormatter
 
 function getFolderPath(body) {
     switch(body.model) {
@@ -18,11 +17,12 @@ function getFolderPath(body) {
 
 function generateEntry(body) {
     const path = getFolderPath(body) // Get the folder path of this entry.
+    const post = postFormatter(body.entry)
 
     if (path === 'index') {
-        nunjuckStatic.generateIndex(`${body.model}.html`, { entry: body.entry })
+        nunjuckStatic.generateIndex(`${body.model}.html`, { entry: post })
     } else {
-        nunjuckStatic.generateSubpage(path, `${body.model}.html`, { entry: body.entry })
+        nunjuckStatic.generateSubpage(path, `${body.model}.html`, { entry: post })
     }
 }
 
@@ -44,13 +44,6 @@ module.exports = function (body) {
     const action = checkEvent(body.event)
 
     if (action === 'build') {
-        if (body.entry.markdown) {
-            // If there's a markdown component
-            body.entry.markdown.map(block => converter.makeHtml(block.content))
-        }
-
-        console.log(body.entry)
-
         generateEntry(body)
     } else if (action === 'delete') {
         // Search for what the delete
